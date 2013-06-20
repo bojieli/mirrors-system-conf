@@ -19,12 +19,17 @@
     # ----------- 8< ---------------
        
     ## provide a convenient tmpfs cache way
-#    location / {
-#	try_files /tmpfs/$uri $uri;
-#        location /tmpfs/ {}
-#    }
-rewrite ^(/deepin-cd/releases/12.12/final/desktop-en/.+\.iso)$ /tmpfs/$1 break;
-rewrite ^(/deepin-cd/releases/12.12/final/desktop/.+\.iso)$ /tmpfs/$1 break;
+    location / {
+	root /srv/tmpfs;
+	try_files $uri @noncached;
+    }
+    
+    ## the real document root
+    location @noncached {
+	root /srv/www;
+	autoindex on;
+	try_files $uri $uri/ /404.html;
+    }
 
     location = /robots.txt {
         alias /srv/www-misc/robots.txt;
