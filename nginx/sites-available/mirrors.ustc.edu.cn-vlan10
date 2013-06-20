@@ -1,0 +1,34 @@
+server {
+    listen 202.141.160.110:80 ;
+
+    include "sites-available/mirror-lab-common";
+}
+
+server {
+    listen 202.141.160.110:80 default bind;
+
+
+    include "sites-available/mirrors.ustc.edu.cn-common";
+
+    # -------------- 8< -----------------
+    # limitations
+    # -------------- 8< -----------------
+
+    ## this server is for telecom, we are mean on both bandwidth and hw resource
+
+    ## rewrite *.iso to mirrors4.ustc.edu.cn 
+    rewrite ^/(.*\.iso)$ http://mirrors3.ustc.edu.cn/$1;
+
+    # redirect all MSIE/Bytes-Range traffic to china mobile
+    ## limit range request for MSIE (thunder)
+    if ($http_user_agent ~ "MSIE" ) { 
+        set $test IE;
+    } 
+    if ($http_range ~ "bytes") {
+        set $test "${test}RANGE";
+    }
+    if ($test = IERANGE) {
+        #return 403;
+        rewrite ^/(.*)$ http://mirrors3.ustc.edu.cn/$1;
+    }
+}

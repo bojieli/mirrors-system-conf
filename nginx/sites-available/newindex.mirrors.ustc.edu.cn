@@ -1,0 +1,36 @@
+server {
+    listen 202.38.95.110:80;
+    listen 202.141.160.110:80;
+    listen 202.141.176.110:80;
+    listen [2001:da8:d800:95::110]:80;
+
+    server_name newindex.mirrors.ustc.edu.cn;
+
+    access_log /var/log/nginx/newindex.log;
+
+    root /srv/www/;
+    autoindex on;
+    index not-exist.html;   # since there is an index.html under /srv/www/, which will prevent dir listing, thus disable it.
+
+    if ($http_user_agent ~ "Mozilla") {
+	set $test "Browser";
+    }
+    if ($args ~ "ajax=true") {
+	set $ajax "true";
+	set $test "${test}Ajax";
+    }
+    if ($test = "Browser") {
+	rewrite ^/.*/$ /#$request_uri redirect;
+	rewrite ^/$ /index/index.html break;
+    }
+
+
+    location /index/ {
+	root /srv/www-misc/newindex/;
+    }
+
+    location /mirror-help/ {
+	root /srv/www-misc/newindex/;
+    }
+
+}

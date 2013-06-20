@@ -1,0 +1,85 @@
+/var/log/nginx/*.log
+/var/log/nginx/mirrors.ustc.edu.cn/*.log
+/var/log/nginx/mirror-lab/*.log
+/var/log/nginx/iso/*.log
+/var/log/nginx/users/*.log
+/var/log/nginx/pypi/*.log
+/srv/array/mirror-lab-root/var/log/pypi/*.log
+/var/log/nginx/mirrors/*.log
+{
+	daily
+	missingok
+	rotate 365
+	dateext
+	compress
+	delaycompress
+#	compresscmd xz
+#	uncompresscmd xz
+#	compressoptions -9
+#	compressext xz
+	notifempty
+	create 0640 www-data adm
+	sharedscripts
+	prerotate
+		if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+			run-parts /etc/logrotate.d/httpd-prerotate; \
+		fi; \
+	endscript
+	postrotate
+		[ ! -f /var/run/nginx.pid ] || kill -USR1 `cat /var/run/nginx.pid`
+	endscript
+}
+#/var/log/nginx/mirrors.ustc.edu.cn/*.log {
+#	daily
+#	missingok
+#	rotate 52
+#	compress
+#	delaycompress
+#	notifempty
+#	create 0640 www-data adm
+#	sharedscripts
+#	prerotate
+#		if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+#			run-parts /etc/logrotate.d/httpd-prerotate; \
+#		fi; \
+#	endscript
+#	postrotate
+#		[ ! -f /var/run/nginx.pid ] || kill -USR1 `cat /var/run/nginx.pid`
+#	endscript
+#}
+#/var/log/nginx/iso/*.log {
+#	daily
+#	missingok
+#	rotate 52
+#	compress
+#	delaycompress
+#	notifempty
+#	create 0640 www-data adm
+#	sharedscripts
+#	prerotate
+#		if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+#			run-parts /etc/logrotate.d/httpd-prerotate; \
+#		fi; \
+#	endscript
+#	postrotate
+#		[ ! -f /var/run/nginx.pid ] || kill -USR1 `cat /var/run/nginx.pid`
+#	endscript
+#}
+#/var/log/nginx/users/*.log {
+#	daily
+#	missingok
+#	rotate 52
+#	compress
+#	delaycompress
+#	notifempty
+#	create 0640 www-data adm
+#	sharedscripts
+#	prerotate
+#		if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+#			run-parts /etc/logrotate.d/httpd-prerotate; \
+#		fi; \
+#	endscript
+#	postrotate
+#		[ ! -f /var/run/nginx.pid ] || kill -USR1 `cat /var/run/nginx.pid`
+#	endscript
+#}

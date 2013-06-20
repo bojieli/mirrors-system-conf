@@ -1,0 +1,29 @@
+    server_name_in_redirect off;
+    server_name lab.mirrors.ustc.edu.cn;
+
+    ## switch to logfmt-2
+    #access_log  /var/log/nginx/mirror-lab/access-f1.log logfmt-1;
+    include	common-log.conf;
+
+    root /srv/array/exports;
+    autoindex on;
+
+    # ----------- 8< ---------------
+    # non-mirror settings
+    # ----------- 8< ---------------
+
+    location = /robots.txt {
+        alias /srv/www-misc/robots.txt;
+    }
+
+    # deny access to .htaccess files, if Apache's document root concurs with nginx's one
+    location ~ /\.ht {
+        deny  all;
+    }
+
+    # --------------- 8< ----------------
+    # mirror related settings
+    # --------------- 8< ----------------
+
+    ## cabal path bug: http://archive.lug.ustc.edu.cn/2013-June/011530.html
+    rewrite ^/hackage/archive/package/(.+)-(.+).tar.gz$ /hackage/archive/$1/$2/$1-$2.tar.gz redirect;

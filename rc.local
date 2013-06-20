@@ -1,0 +1,72 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+ip route add 0/0 via 202.38.95.126 table 100
+ip route add 0/0 via 202.141.160.126 table 101
+ip route add 0/0 via 202.141.176.126 table 102
+
+ip rule add from 202.38.95.110 table 100
+ip rule add from 202.141.160.110 table 101
+ip rule add from 202.141.176.110 table 102
+
+# for mirrors-lab
+ip rule add from 10.8.95.2 table 100
+ip rule add from 10.8.10.2 table 101
+ip rule add from 10.8.140.2 table 102
+
+#ip rule add to 195.135.221.130 table 101
+
+# for rsync.releases.ubuntu.com
+ip route add 91.189.92/24 via 202.141.176.126 table main
+# for syncproxy.wna.debian.org
+ip route add 140.211.166/24 via 202.141.176.126 table main
+# for ftp2.de.debian.org
+ip route add 137.226.34/24 via 202.141.176.126 table main
+# for cdimage.debian.org
+ip route add 130.239.18/24 via 202.141.176.126 table main
+# for dl.fedoraproject.org
+ip route add 209.132.181/24 via 202.141.176.126 table main
+# for archive.ubuntu.com
+#ip route add 91.189.92.0/24 via 202.141.176.126 table main
+#temporary change: 2013-06-17
+ip route add 91.189.91.0/24 via 202.38.95.126 table main
+ip route add 91.189.92.0/24 via 202.38.95.126 table main
+# for us-msync.centos.org
+ip route add 216.7.183/24 via 202.141.176.126 table main
+ip route add 208.74.123/24 via 202.141.176.126 table main
+ip route add 64.131.88/24 via 202.141.176.126 table main
+# for ftp6.tw.FreeBSD.org
+ip route add 140.112.8/24 via 202.141.176.126 table main
+# for rsync.startos.org
+ip route add 58.253.70.15/32 via 202.141.160.126 table main
+# for stage.opensuse.org
+#ip route add 195.135.221/24 via 202.141.176.126 table main
+# for mirrors.kernel.org
+ip route add 149.20.4.0/24 via 202.141.176.126 table main
+# for mirror.us.leaseweb.net
+ip route add 108.59.10.0/24 via 202.141.176.126 table main
+# for downloads.raspberrypi.org
+ip route add 94.136.44.0/24 via 202.141.176.126 table main
+# for rsync.videolan.org
+ip route add 88.191.250.0/24 via 202.141.176.126 table main
+
+#snullp's vps accelator, contact snullp@gmail.com before delete
+ip route add 184.169.153/24 via 202.141.176.126 table main
+
+ip -6 addr add 2001:da8:d800:95::110/64 dev vlan95
+
+sudo -u www-data /etc/init.d/fcgiwrap
+
+git daemon --base-path=/srv/git/ --user=nobody --reuseaddr --export-all /srv/git/ &
+
+exit 0

@@ -1,0 +1,14 @@
+server {
+    listen 127.0.1.1:80 default bind;
+    listen 10.8.1.1:80 default bind;
+
+
+    include "sites-available/mirrors.ustc.edu.cn-common";
+
+    # -------------- 8< -----------------
+    # limitations
+    # -------------- 8< -----------------
+
+    # no limit
+
+}

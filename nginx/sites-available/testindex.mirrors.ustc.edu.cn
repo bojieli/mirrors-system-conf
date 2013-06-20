@@ -1,0 +1,13 @@
+server {
+    listen 202.38.95.110:80;
+    listen 202.141.160.110:80;
+    listen 202.141.176.110:80;
+    listen [2001:da8:d800:95::110]:80;
+
+    server_name testindex.mirrors.ustc.edu.cn;
+
+    root /srv/www-misc/testindex;
+    autoindex on;
+
+    include	common-log.conf;
+}

@@ -1,0 +1,85 @@
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+proc            /proc           proc    defaults        0       0
+# / was on /dev/sdb1 during installation
+UUID=11eecf2f-e505-4d96-8add-08b353cd87cd /               ext4    errors=remount-ro 0       1
+# /home was on /dev/sdb2 during installation
+UUID=c6f0b034-9341-4f14-9ea6-0ad86ba4a6f3 /home           ext4    defaults        0       2
+# /var/log/ was on /dev/sdb3 during installation
+UUID=141c9000-2cd0-497c-be14-63064ecb23fa /var/log/       ext4    defaults        0       2
+
+none		/sys/fs/cgroup	cgroup	defaults	0	2
+
+# /dev/sdg1, iscsi device, LABEL=array
+#UUID=f4492d70-7c0b-48cc-941a-702cfca200f7 /srv/array    xfs     inode64,noatime,nobarrier,sunit=256,swidth=3584        0       2
+UUID=f4492d70-7c0b-48cc-941a-702cfca200f7 /srv/array    xfs     inode64,noatime,nobarrier        0       2
+
+# lug-mirrors
+202.141.162.123:/srv/mirrors		/srv/lug		nfs	nodev,nosuid,noexec
+# lug-log
+202.141.162.123:/home/mirror/log	/home/mirror/log/lug	nfs	nodev,nosuid,noexec
+# olddebian-log
+#202.141.162.122:/home/mirror/log	/home/mirror/log/olddebian	nfs	nodev,nosuid,noexec
+
+
+/dev/mapper/vg--sdc--2047g-lvol0	/srv/ftp1	ext4	noatime		0	1
+/dev/mapper/vg--sdd--2047g-lvol0	/srv/ftp2	ext4	noatime		0	1
+/dev/mapper/vg--sdf--913g-lvol0 	/srv/ftp3	ext4	noatime		0	1
+/dev/mapper/vg--sde--2047g-lvol0	/srv/ftp4	ext4	noatime		0	1
+/dev/mapper/vg--sda--930g-lvol0		/srv/www-misc	ext4	noatime		0	1
+
+/srv/ftp4/archlinux	/srv/ftp/archlinux	none	bind	0	0
+#/srv/array/pool/archlinux	/srv/ftp/archlinux	none	bind	0	0
+#/srv/ftp1/centos	/srv/ftp/centos		none	bind	0	0
+#/srv/ftp4/centos	/srv/ftp/centos		none	bind	0	0
+#/srv/array/pool/centos	/srv/ftp/centos		none	bind	0	0
+/srv/ftp4/centos	/srv/ftp/centos		none	bind	0	0
+/srv/ftp2/CTAN		/srv/ftp/CTAN		none	bind	0	0
+/srv/ftp2/CPAN		/srv/ftp/CPAN		none	bind	0	0
+#/srv/ftp2/CRAN		/srv/ftp/CRAN		none	bind	0	0
+/srv/array/pool/CRAN		/srv/ftp/CRAN		none	bind	0	0
+/srv/ftp1/debian-security	/srv/ftp/debian-security	none	bind	0	0
+/srv/ftp1/debian-multimedia	/srv/ftp/debian-multimedia	none	bind	0	0
+/srv/ftp1/debian-volatile	/srv/ftp/debian-volatile	none	bind	0	0
+/srv/ftp1/debian-backports	/srv/ftp/debian-backports	none	bind	0	0
+/srv/ftp1/debian	/srv/ftp/debian		none	bind	0	0
+/srv/ftp1/gentoo	/srv/ftp/gentoo		none	bind	0	0
+/srv/www-misc/mirror/debian-cd	/srv/ftp/debian-cd	none	bind	0	0
+#/srv/ftp2/fedora	/srv/ftp/fedora		none	bind	0	0
+/srv/array/pool/fedora	/srv/ftp/fedora		none	bind	0	0
+/srv/ftp3/gnu		/srv/ftp/gnu		none	bind	0	0
+#/srv/ftp3/linux-kernel	/srv/ftp/linux-kernel	none	bind	0	0
+/srv/array/pool/linux-kernel	/srv/ftp/linux-kernel	none	bind	0	0
+/srv/array/pool/ubuntu	/srv/ftp/ubuntu		none	bind	0	0
+/srv/array/pool/ubuntu-releases	/srv/ftp/ubuntu-releases	none	bind	0	0
+/srv/ftp2/linuxmint	/srv/ftp/linuxmint	none	bind	0	0
+/srv/ftp4/linuxmint-cd	/srv/ftp/linuxmint-cd	none	bind	0	0
+/srv/www-misc/mirror/turnkeylinux /srv/ftp/turnkeylinux none	bind	0	0
+/srv/www-misc/mirror/progress-linux /srv/ftp/progress-linux none	bind	0	0
+
+#/srv/ftp1/gentoo-portage	/srv/ftp/gentoo-portage	none	bind	0	0
+#
+#/srv/ftp2/linuxmint	/srv/ftp/linuxmint	nont	bind	0	0
+#/srv/ftp2/puppy		/srv/ftp/puppy	none	bind	0	0
+#/srv/ftp2/deepin	/srv/ftp/deepin	none	bind	0	0
+#/srv/ftp2/deepin-cd	/srv/ftp/deepin-cd	none	bind	0	0
+#
+#/srv/ftp3/dotdeb	/srv/ftp/dotdeb	none	bind	0	0
+#/srv/ftp3/macports	/srv/ftp/macports	none	bind	0	0
+#/srv/ftp3/chromium-buildbot	/srv/ftp/chromium-buildbot	none	bind 	0	0
+#/srv/ftp3/Xorg		/srv/ftp/Xorg	none	bind	0	0
+#/srv/ftp3/kde		/srv/ftp/kde	none	bind	0	0
+/srv/array/pool/kali	/srv/ftp/kali	none	bind	0	0
+/srv/array/pool/kali-security	/srv/ftp/kali-security	none	bind	0	0
+/srv/array/pool/kali-images	/srv/ftp/kali-images	none	bind	0	0
+/srv/array/exports/openvz	/srv/ftp/openvz		none	bind	0	0
+/srv/array/exports/mageia	/srv/ftp/mageia		none	bind	0	0
+/srv/ftp4/eclipse	/srv/ftp/eclipse	none	bind	0	0
+/srv/array/mirror-lab-root/srv/ftp/anthon/public	/srv/ftp/anthon	none	bind	0	0
+/srv/array/exports/tizen	/srv/ftp/tizen	none	bind	0	0
+/srv/array/exports/ubuntu-old-releases	/srv/ftp/ubuntu-old-releases	none	bind	0	0

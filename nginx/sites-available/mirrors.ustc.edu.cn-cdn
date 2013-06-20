@@ -1,0 +1,19 @@
+server {
+    listen 202.141.160.110:80;
+    listen 202.141.176.110:80;
+    listen 202.38.95.110:80;
+    server_name cdn.mirrors.ustc.edu.cn *.cdn.mirrors.ustc.edu.cn;
+
+    root /srv/www/;
+    ### modified by Guo Jiahua, 2013-05-01 22:47:16
+    # autoindex off;
+    autoindex on;
+
+    access_log /tmp/tmp.access.log;
+    error_log /tmp/tmp.error.log;
+
+
+    #if ($args !~ "redirect") {
+    #    return 403;
+    #}
+}
