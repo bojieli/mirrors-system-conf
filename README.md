@@ -16,3 +16,5 @@ ln -s logrotate.d /etc/logrotate.d
 
 ln -s ganglia /etc/ganglia
 ln -s collectd /etc/collectd
+
+ln -s /home/mirror/system-conf/404.html /srv/www/404.html
