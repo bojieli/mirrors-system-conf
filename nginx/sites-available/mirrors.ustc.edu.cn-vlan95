@@ -16,15 +16,18 @@ server {
     # -------------- 8< -----------------
 
     # redirect all MSIE/Bytes-Range traffic to china mobile
+    # Disabled by Zhang Cheng, 2013.06.21
+    # previously, cernet and unicom users will come here, this redirect rule is for unicom
+    # now, unicom users will not reach here, so let's save cernet users
     ## limit range request for MSIE (thunder)
-    if ($http_user_agent ~ "MSIE" ) { 
-        set $test IE;
-    } 
-    if ($http_range ~ "bytes") {
-        set $test "${test}RANGE";
-    }
-    if ($test = IERANGE) {
-        #return 403;
-        rewrite ^/(.*)$ http://mirrors3.ustc.edu.cn/$1;
-    }
+    #if ($http_user_agent ~ "MSIE" ) { 
+    #    set $test IE;
+    #} 
+    #if ($http_range ~ "bytes") {
+    #    set $test "${test}RANGE";
+    #}
+    #if ($test = IERANGE) {
+    #    #return 403;
+    #    rewrite ^/(.*)$ http://mirrors3.ustc.edu.cn/$1;
+    #}
 }

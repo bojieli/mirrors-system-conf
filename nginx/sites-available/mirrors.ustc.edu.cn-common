@@ -19,17 +19,26 @@
     # ----------- 8< ---------------
        
     ## provide a convenient tmpfs cache way
-    location / {
-	root /srv/tmpfs;
-	try_files $uri @noncached;
+    try_files /tmpfs/$uri $uri $uri/ =404;
+    error_page 404  /error/404.html;
+    location /error/ {
+	set $error_variant "tools";
+	if ($http_user_agent ~ "Mozilla") {
+	    set $error_variant "browser";
+	}
+	alias /srv/www-misc/error-$error_variant/;
     }
-    
-    ## the real document root
-    location @noncached {
-	root /srv/www;
-	autoindex on;
-	try_files $uri $uri/ /404.html;
-    }
+#    location / {
+#	root /srv/tmpfs;
+#	try_files $uri @noncached;
+#    }
+#    
+#    ## the real document root
+#    location @noncached {
+#	root /srv/www;
+#	autoindex on;
+#	try_files $uri $uri/ /404.html;
+#    }
 
     location = /robots.txt {
         alias /srv/www-misc/robots.txt;

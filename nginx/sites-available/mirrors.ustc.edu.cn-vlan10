@@ -17,7 +17,8 @@ server {
     ## this server is for telecom, we are mean on both bandwidth and hw resource
 
     ## rewrite *.iso to mirrors4.ustc.edu.cn 
-    rewrite ^/(.*\.iso)$ http://mirrors3.ustc.edu.cn/$1;
+    ## this line is commented out by zhang cheng on 2013.06.21/14:50
+    #rewrite ^/(.*\.iso)$ http://mirrors3.ustc.edu.cn/$1;
 
     # redirect all MSIE/Bytes-Range traffic to china mobile
     ## limit range request for MSIE (thunder)
