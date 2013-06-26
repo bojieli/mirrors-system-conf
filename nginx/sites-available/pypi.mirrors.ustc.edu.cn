@@ -11,5 +11,5 @@ server {
     autoindex on;
 
     include	common-log.conf;
-    access_log /srv/array/mirror-lab-root/var/log/pypi/access.log combined;
+    access_log  /var/log/nginx/pypi/access.log combined;
 }

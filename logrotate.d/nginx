@@ -4,7 +4,6 @@
 /var/log/nginx/iso/*.log
 /var/log/nginx/users/*.log
 /var/log/nginx/pypi/*.log
-/srv/array/mirror-lab-root/var/log/pypi/*.log
 /var/log/nginx/mirrors/*.log
 {
 	daily
