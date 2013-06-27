@@ -17,7 +17,7 @@ none		/sys/fs/cgroup	cgroup	defaults	0	2
 
 # /dev/sdg1, iscsi device, LABEL=array
 #UUID=f4492d70-7c0b-48cc-941a-702cfca200f7 /srv/array    xfs     inode64,noatime,nobarrier,sunit=256,swidth=3584        0       2
-UUID=f4492d70-7c0b-48cc-941a-702cfca200f7 /srv/array    xfs     inode64,noatime,nobarrier        0       2
+UUID=f4492d70-7c0b-48cc-941a-702cfca200f7 /srv/array    xfs     inode64,noatime        0       2
 
 # lug-mirrors
 202.141.162.123:/srv/mirrors		/srv/lug		nfs	nodev,nosuid,noexec
@@ -83,4 +83,4 @@ UUID=f4492d70-7c0b-48cc-941a-702cfca200f7 /srv/array    xfs     inode64,noatime,
 /srv/array/mirror-lab-root/srv/ftp/anthon/public	/srv/ftp/anthon	none	bind	0	0
 /srv/array/exports/tizen	/srv/ftp/tizen	none	bind	0	0
 /srv/array/exports/ubuntu-old-releases	/srv/ftp/ubuntu-old-releases	none	bind	0	0
-/srv/array/mirror-lab-root/var/log/pypi	/var/log/nginx/pypi	none	bind	0	0
+/var/log/nginx/pypi	/srv/array/mirror-lab-root/var/log/pypi	none	bind	0	0
