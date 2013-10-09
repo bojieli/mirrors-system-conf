@@ -20,8 +20,9 @@ server {
 	set $test "${test}Ajax";
     }
     if ($test = "Browser") {
+
 	rewrite ^/.*/$ /#$request_uri redirect;
-	rewrite ^/$ /index/index.html break;
+	rewrite ^/$ /index/index.html last;
     }
 
 

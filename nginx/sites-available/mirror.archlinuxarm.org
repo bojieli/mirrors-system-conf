@@ -8,7 +8,7 @@ server {
 		cn2.mirror.archlinuxarm.org
 		mirror.archlinuxarm.org;
 
-    root /srv/array/exports/archlinuxarm/;
+    root /srv/www/archlinuxarm/;
     autoindex on;
 
     include	common-log.conf;
