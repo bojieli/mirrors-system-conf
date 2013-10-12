@@ -89,8 +89,11 @@
     }
 
     location ~ \.cgi$ {
-        fastcgi_pass unix:/tmp/cgi.sock;
-        fastcgi_param SCRIPT_FILENAME /srv/www-misc/cgi$fastcgi_script_name;
+        root /srv/www-misc/;
+        fastcgi_split_path_info ^(.+\.cgi)(.*)$;
+        try_files $uri =404;
+        fastcgi_pass unix:/var/run/fcgiwrap.socket;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include    fastcgi_params;
     }
 
