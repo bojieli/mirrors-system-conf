@@ -1,0 +1,21 @@
+upstream php_mirror {
+	server 114.214.197.143:20373; # freeshell ID 373, node 2
+	server 114.214.197.140:20410; # freeshell ID 410, node 4
+}
+
+server {
+    listen 202.38.95.110:80;
+    listen 202.141.160.110:80;
+    listen 202.141.176.110:80;
+    listen [2001:da8:d800:95::110]:80;
+
+    server_name php.mirrors.ustc.edu.cn
+		~cn.*\.php\.net$;
+
+    include	common-log.conf;
+    access_log  /var/log/nginx/php-mirror/access.log combined; # for webalizer
+
+    location / {
+        proxy_pass http://php_mirror;
+    }
+}
