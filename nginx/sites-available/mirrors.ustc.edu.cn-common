@@ -6,9 +6,9 @@
                  ftp.cn.debian.org 
                  mirror.edu.backtrack-linux.cn;
 
-    ## disabled combined log
-    #access_log  /var/log/nginx/mirrors.ustc.edu.cn/access.log;
-    #access_log  /var/log/nginx/mirrors.ustc.edu.cn/access-f1.log logfmt-1;
+    # enable combined log for awstats
+    access_log  /var/log/nginx/mirrors/access.log combined;
+    # general log
     include	common-log.conf;
 
     root /srv/www/;
