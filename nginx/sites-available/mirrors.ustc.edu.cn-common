@@ -84,8 +84,14 @@
     }
 
     ## collectd web
-    location /collectd-web/ {
-        root /srv/www-misc/;
+    location /collectd-web {
+        root /srv/www-misc;
+    }
+
+    ## awstats
+    location /awstats {
+        alias /srv/awstats/mirrors;
+        index index.html awstats.mirrors.html;
     }
 
     location ~ \.cgi$ {

@@ -23,7 +23,7 @@ server {
 
     location /stats {
         alias /srv/awstats/php-mirror;
-	index index.html index.htm;
+	index index.html awstats.php-mirror.html;
 	autoindex on;
     }
 }
