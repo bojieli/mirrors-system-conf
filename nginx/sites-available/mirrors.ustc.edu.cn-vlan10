@@ -19,6 +19,9 @@ server {
     ## rewrite *.iso to mirrors4.ustc.edu.cn 
     ## this line is commented out by zhang cheng on 2013.06.21/14:50
     #rewrite ^/(.*\.iso)$ http://mirrors3.ustc.edu.cn/$1;
+    ## this line is added by Bojie Li on 10/18/2013
+    ## use IP instead of domain name in case of DNS failure
+    rewrite ^/(.*\.iso)$ http://202.141.176.110/$1;
 
     # redirect all MSIE/Bytes-Range traffic to china mobile
     ## limit range request for MSIE (thunder)
