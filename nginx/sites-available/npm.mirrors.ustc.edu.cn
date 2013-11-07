@@ -1,0 +1,25 @@
+server {
+    listen 202.38.95.110:80;
+    listen 202.141.160.110:80;
+    listen 202.141.176.110:80;
+    listen [2001:da8:d800:95::110]:80;
+
+    server_name npm.mirrors.ustc.edu.cn;
+
+    location / {
+        root /srv/www/npm;
+        autoindex on;
+    }
+
+    location /registry/_design/app/_rewrite {
+        proxy_pass http://114.214.197.8:20470/registry/_design/app/_rewrite;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location /registry {
+        proxy_pass http://114.214.197.8:20470/registry/_design/app/_rewrite;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}

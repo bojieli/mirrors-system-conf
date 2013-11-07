@@ -107,13 +107,6 @@
     ## --> disabled on May 2, 16:39
     #rewrite ^/ubuntu-releases/(.+)$ http://ubuntu1304.cdn.mirrors.ustc.edu.cn/ubuntu-releases/$1 redirect;
 
-    # npm mirror
-    location /npm/registry {
-        proxy_pass http://114.214.197.8:20470/registry/_design/app/_rewrite;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-
     ## mirror-lab entry
     #location /mirror-lab/exports {
     #	alias /srv/array/exports;
