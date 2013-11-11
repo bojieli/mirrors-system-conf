@@ -86,6 +86,9 @@
     ## collectd web
     location /collectd-web {
         root /srv/www-misc;
+        if ($scheme = "http") {
+            rewrite ^/(.*)$ https://$http_host/$1 permanent;
+        }
     }
 
     ## awstats
