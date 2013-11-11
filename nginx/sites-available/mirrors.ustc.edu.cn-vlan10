@@ -1,12 +1,13 @@
 server {
     listen 202.141.160.110:80 ;
+    listen 202.141.160.110:443 ;
 
     include "sites-available/mirror-lab-common";
 }
 
 server {
     listen 202.141.160.110:80 default bind;
-
+    listen 202.141.160.110:443 default bind ssl;
 
     include "sites-available/mirrors.ustc.edu.cn-common";
 

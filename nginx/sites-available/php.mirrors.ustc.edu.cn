@@ -8,6 +8,10 @@ server {
     listen 202.141.160.110:80;
     listen 202.141.176.110:80;
     listen [2001:da8:d800:95::110]:80;
+    listen 202.38.95.110:443;
+    listen 202.141.160.110:443;
+    listen 202.141.176.110:443;
+    listen [2001:da8:d800:95::110]:443;
 
     server_name php.mirrors.ustc.edu.cn
 		~cn.*\.php\.net$;
