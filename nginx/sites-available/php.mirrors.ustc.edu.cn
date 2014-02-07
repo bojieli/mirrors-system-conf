@@ -14,6 +14,7 @@ server {
     listen [2001:da8:d800:95::110]:443;
 
     server_name php.mirrors.ustc.edu.cn
+		php.lug.ustc.edu.cn
 		~cn.*\.php\.net$;
 
     include	common-log.conf;
