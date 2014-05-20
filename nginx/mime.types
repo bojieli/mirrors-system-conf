@@ -33,6 +33,7 @@ types {
     application/vnd.wap.wmlc              wmlc;
     application/vnd.wap.xhtml+xml         xhtml;
     application/x-7z-compressed           7z;
+    application/x-gzip                    gz;
     application/x-cocoa                   cco;
     application/x-java-archive-diff       jardiff;
     application/x-java-jnlp-file          jnlp;
@@ -50,7 +51,7 @@ types {
     application/zip                       zip;
 
     application/octet-stream              bin exe dll;
-    application/octet-stream              deb;
+    application/x-deb                     deb;
     application/octet-stream              dmg;
     application/octet-stream              eot;
     application/octet-stream              iso img;
