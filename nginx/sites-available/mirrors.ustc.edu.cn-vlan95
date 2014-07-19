@@ -8,9 +8,9 @@ server {
 }
 
 server {
-    listen 202.38.95.110:80 default bind; 
+    listen 202.38.95.110:80 default bind backlog=1024; 
     listen 202.38.95.110:443 default bind ssl;
-    listen [2001:da8:d800:95::110]:80 default bind ipv6only=on;
+    listen [2001:da8:d800:95::110]:80 default bind ipv6only=on backlog=1024;
     listen [2001:da8:d800:95::110]:443 default bind ipv6only=on ssl;
 
     include "sites-available/mirrors.ustc.edu.cn-common";

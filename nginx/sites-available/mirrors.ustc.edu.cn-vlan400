@@ -6,7 +6,7 @@ server {
 }
 
 server {
-    listen 202.141.176.110:80 default bind; 
+    listen 202.141.176.110:80 default bind backlog=1024; 
     listen 202.141.176.110:443 default bind ssl;
 
     include "sites-available/mirrors.ustc.edu.cn-common";
