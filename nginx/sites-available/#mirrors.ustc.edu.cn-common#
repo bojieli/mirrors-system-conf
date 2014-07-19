@@ -132,3 +132,6 @@
 
     ## redirect pypi mirror to use a separate log required by pep381
     rewrite ^/pypi/(.*)$ http://pypi.mirrors.ustc.edu.cn/$1 permanent;
+
+    ## fix cygwin x86_64 install 404 not found
+    rewrite ^/cygwin/x86_64/release/_autorebase/_autorebase-(.+)$ /cygwin/x86_64/release/_autorebase/_autorebase-000159-1.tar.bz2 redirect;
