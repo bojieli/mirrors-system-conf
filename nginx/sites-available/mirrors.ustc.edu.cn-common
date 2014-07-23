@@ -11,15 +11,29 @@
     # general log
     include	common-log.conf;
 
-    root /srv/www/;
-    autoindex on;
+    # use nginx-worker to serve requests not hitting cache
+    root /mnt/ssd/cache;
+    autoindex off; # directory indexes must be served by nginx-worker
+
+    try_files $uri @noncached;
+    location @noncached {
+        proxy_pass http://nginx-worker;
+        # tcp connection latency of unix socket should be very low
+        proxy_connect_timeout 2s;
+        proxy_redirect default;
+    }
+
+    location = / {
+        index index.html;
+    }
 
     # ----------- 8< ---------------
     # non-mirror settings
     # ----------- 8< ---------------
        
-    ## provide a convenient tmpfs cache way
-    try_files /tmpfs/$uri $uri $uri/ =404;
+#   # provide a convenient tmpfs cache way
+#   try_files /tmpfs/$uri $uri $uri/ =404;
+
     error_page 404  /error/404.html;
     location /error/ {
 	set $error_variant "tools";
@@ -28,6 +42,7 @@
 	}
 	alias /srv/www-misc/error-$error_variant/;
     }
+
 #    location / {
 #	root /srv/tmpfs;
 #	try_files $uri @noncached;
