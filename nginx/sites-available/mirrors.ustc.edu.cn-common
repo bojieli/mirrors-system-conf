@@ -23,10 +23,6 @@
         proxy_redirect default;
     }
 
-    location = / {
-        index index.html;
-    }
-
     # ----------- 8< ---------------
     # non-mirror settings
     # ----------- 8< ---------------
