@@ -11,7 +11,7 @@ server {
     server_name pypi.mirrors.ustc.edu.cn
 		~.*.pypi.python.org$;
 
-    root /srv/array/exports/pypi/web;
+    root /srv/repo/pypi/web;
     autoindex on;
 
     include	common-log.conf;
