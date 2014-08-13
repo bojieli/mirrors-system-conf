@@ -1,19 +1,7 @@
-server {
-    listen 202.141.176.110:80; 
-    listen 202.141.176.110:443; 
-
-    include "sites-available/mirror-lab-common";
-}
-
+# China Mobile
 server {
     listen 202.141.176.110:80 default bind backlog=1024; 
     listen 202.141.176.110:443 default bind ssl;
 
     include "sites-available/mirrors.ustc.edu.cn-common";
-
-    # -------------- 8< -----------------
-    # limitations
-    # -------------- 8< -----------------
-
-    # we don't limit traffic with china mobile
 }

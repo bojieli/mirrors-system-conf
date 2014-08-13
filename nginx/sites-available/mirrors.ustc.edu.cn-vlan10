@@ -1,31 +1,17 @@
-server {
-    listen 202.141.160.110:80 ;
-    listen 202.141.160.110:443 ;
-
-    include "sites-available/mirror-lab-common";
-}
-
+# China Telecom
 server {
     listen 202.141.160.110:80 default bind backlog=1024;
     listen 202.141.160.110:443 default bind ssl;
 
     include "sites-available/mirrors.ustc.edu.cn-common";
 
-    # -------------- 8< -----------------
-    # limitations
-    # -------------- 8< -----------------
-
-    ## this server is for telecom, we are mean on both bandwidth and hw resource
-
-    ## rewrite *.iso to mirrors4.ustc.edu.cn 
-    ## this line is commented out by zhang cheng on 2013.06.21/14:50
-    #rewrite ^/(.*\.iso)$ http://mirrors3.ustc.edu.cn/$1;
-    ## this line is added by Bojie Li on 10/18/2013
-    ## use IP instead of domain name in case of DNS failure
+    # Redirect all ISO download requests to China Mobile,
+    # as are mean on bandwidth of Telecom.
+    # Use IP instead of domain name in case of DNS failure.
     rewrite ^/(.*\.iso)$ http://202.141.176.110/$1;
 
-    # redirect all MSIE/Bytes-Range traffic to china mobile
-    ## limit range request for MSIE (thunder)
+    # Redirect all MSIE/Bytes-Range traffic to China Mobile
+    # (limit range request for Thunder)
     if ($http_user_agent ~ "MSIE" ) { 
         set $test IE;
     } 
@@ -33,7 +19,6 @@ server {
         set $test "${test}RANGE";
     }
     if ($test = IERANGE) {
-        #return 403;
         rewrite ^/(.*)$ http://mirrors3.ustc.edu.cn/$1;
     }
 }
